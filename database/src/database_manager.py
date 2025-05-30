@@ -16,3 +16,4 @@ class DatabaseManager:
         os.makedirs(self.DATA_PATH)
 
     self.connection = sqlite3.connect(database_path)
+    self.cursor = self.connection.cursor()
