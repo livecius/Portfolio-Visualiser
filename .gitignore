@@ -323,6 +323,9 @@ psd
 thumb
 sketch
 
+## Svelte ##
+frontend/.svelte-kit
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
