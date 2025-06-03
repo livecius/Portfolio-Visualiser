@@ -1,3 +1,7 @@
 <script>
-    import "../style.css"
+    import "../style.css";
 </script>
+
+<main>
+    <slot />
+</main>
