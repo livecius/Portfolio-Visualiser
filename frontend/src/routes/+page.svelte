@@ -16,7 +16,7 @@
 
                     <button class="btn btn-outline btn-primary mt-2">Sign Up</button>
 
-                    <a class="btn btn-link btn-soft mt-2" href="/demos/dashboard">See a Demo?</a>
+                    <a class="btn btn-secondary btn-soft mt-2" href="/demos/dashboard">See a Demo?</a>
 
                 </fieldset>
             </div>
