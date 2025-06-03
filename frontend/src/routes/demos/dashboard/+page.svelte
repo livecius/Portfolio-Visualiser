@@ -45,8 +45,8 @@
 
 <style>
   .app {
-      width: 50vh;
-      height: 50vh;
+      width: 60vh;
+      height: 60vh;
   }
 </style>
 
@@ -89,8 +89,58 @@
     <div class="app">
       <Chart {init} {options} />
     </div>
-    <ul class="list bg-base-100 rounded-box shadow-md">
 
+    <div>
+      <table class="table">
+        <!-- Head -->
+        <thead>
+          <tr>
+            <th>Asset Name</th>
+            <th>Total Value</th>
+            <th>Allocation</th>
+          </tr>
+        </thead>
+        <!-- Row -->
+        <tbody>
+          <tr>
+            <th>Nvidia</th>
+            <th>$2,841.23</th>
+            <th>33.30%</th>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>Amazon</th>
+            <th>$1,993.13</th>
+            <th>23.36%</th>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>Apple</th>
+            <th>$1,572.49</th>
+            <th>18.43%</th>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>Spotify</th>
+            <th>$1,312.26</th>
+            <th>15.38%</th>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th>Advanced Micro Devices</th>
+            <th>$813.12</th>
+            <th>9.53%</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--
+    <ul class="list bg-base-100 rounded-box shadow-md">
       <li class="list-row">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-nvidia" viewBox="0 0 16 16">
@@ -143,6 +193,7 @@
         <div>9.53%</div>
       </li>
     </ul>
+    -->
 
     <div class="divider divider-horizontal"></div>
     <!-- Total Portfolio Value -->
