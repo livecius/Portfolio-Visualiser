@@ -28,7 +28,7 @@
                   { value: 1048, name: 'Nvidia (NVDA)' },
                   { value: 735, name: 'Amazon (AMZN)' },
                   { value: 580, name: 'Apple (AAPL)' },
-                  { value: 484, name: 'Spotify (SPOT)' },
+                  { value: 484, name: 'United States Dollar (USD)' },
                   { value: 300, name: 'Advanced Micro Devices  (AMD)' }
               ],
               emphasis: {
@@ -103,35 +103,35 @@
         <!-- Row -->
         <tbody>
           <tr>
-            <th>Nvidia</th>
+            <th>🏛️ Nvidia</th>
             <th>$2,841.23</th>
             <th>33.30%</th>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <th>Amazon</th>
+            <th>🏛️ Amazon</th>
             <th>$1,993.13</th>
             <th>23.36%</th>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <th>Apple</th>
+            <th>🏛️ Apple</th>
             <th>$1,572.49</th>
             <th>18.43%</th>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <th>Spotify</th>
+            <th>💲 United States Dollar</th>
             <th>$1,312.26</th>
             <th>15.38%</th>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <th>Advanced Micro Devices</th>
+            <th>🏛️ Advanced Micro Devices</th>
             <th>$813.12</th>
             <th>9.53%</th>
           </tr>
@@ -148,13 +148,17 @@
         <div class="stat-value">$8,532.25</div>
         <div class="stat-desc text-success">↗︎ $103.43 This Week (1.21%)</div>
       </div>
-    </div>
 
-    <div class="stats shadow">
       <div class="stat">
         <div class="stat-title">Total Dividends Received</div>
         <div class="stat-value">$32.56</div>
         <div class="stat-desc">Average of $1.52 a month.</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-title">Total Unrealised Gains</div>
+        <div class="stat-value">$1,562.42</div>
+        <div class="stat-desc text-success">↗ $23.56 since yesterday!</div>
       </div>
     </div>
   </div>
