@@ -1,2 +1,3 @@
 # Runtime requirements
 fastapi[all]
+requests
