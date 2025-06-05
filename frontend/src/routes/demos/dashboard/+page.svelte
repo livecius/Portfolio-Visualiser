@@ -160,6 +160,13 @@
         <div class="stat-value">$1,562.42</div>
         <div class="stat-desc text-success">↗ $23.56 since yesterday!</div>
       </div>
+
+      <div class="stat">
+        <div class="stat-title">Underperforming the Market YTD.</div>
+        <div class="stat-value">VOO: 2.3%</div>
+        <div class="stat-value text-error">Yours: -1.42%</div>
+        <div class="stat-desc">Underperforming by 3.72% Year To Date</div>
+      </div>
     </div>
   </div>
 </div>
