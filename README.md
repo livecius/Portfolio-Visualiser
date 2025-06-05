@@ -13,7 +13,7 @@ An investment portfolio data and statistic visualiser utilising Broker APIs'.
 
 ## Tech Stack
 
-- Vite & React
+- Svelte
 - Python with FastAPI
 - SQLite
 
