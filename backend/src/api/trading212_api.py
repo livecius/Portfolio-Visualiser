@@ -26,6 +26,17 @@ class Trading212:
   def fetch_account_metadata(self):
     return self.requests("GET", "/api/v0/equity/account/info")
 
+  # Personal Portfolio
+  def fetch_all_open_positions(self):
+    return self.requests("GET", "/api/v0/equity/portfolio")
+
+  def search_for_a_specific_position_by_ticker(self, ticker):
+    return self.requests("POST", "/api/v0/equity/portfolio/ticker", {"ticker": ticker})
+
+  def fetch_a_specific_position(self, ticker):
+    return self.requests("GET", "/api/v0/equity/portfolio/ticker", {"ticker": ticker})
+
+
   def requests(self, method, path, params = None):
     """
     Send a REST API request to the url with the endpoint path.
@@ -53,6 +64,10 @@ class Trading212:
 
     if response == "GET":
       response = requests.get(url, headers=headers)
+
+    elif response == "POST":
+      response = requests.post(url, headers=headers, json=params)
+
     else:
       raise KeyError(f"Unknown HTTP method: {method}")
 
