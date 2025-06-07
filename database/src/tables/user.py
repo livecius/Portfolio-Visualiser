@@ -1,14 +1,13 @@
-class User:
+from tables.abstract_table import AbstractTable
+
+class User(AbstractTable):
   """
   Facade manager for the User Table.
 
   You should not instantiate this class directly, use the exposed methods through DatabaseManager.
   """
 
-  def __init__(self, connection):
-    self.connection = connection
-    self.cursor = self.connection.cursor()
-
+  def initialise_table(self):
     self.cursor.execute("""
     CREATE TABLE IF NOT EXISTS user (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
