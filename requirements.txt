@@ -1,2 +1,6 @@
 # Runtime requirements
 fastapi[all]
+requests
+
+# Developer requirements
+python-dotenv
