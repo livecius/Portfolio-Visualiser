@@ -1,3 +1,4 @@
+import datetime
 from dev_config import TRADING212_API_KEY
 import requests
 
@@ -19,6 +20,20 @@ class Trading212:
 
     self.api_key = api_key
 
+  @staticmethod
+  def build_query_params(**kwargs):
+    query = {}
+
+    for key, value in kwargs.items():
+      query[key] = value
+
+    return query
+
+  @staticmethod
+  def get_epoch_as_iso8601_utc():
+    epoch = datetime.datetime.fromtimestamp(0, datetime.timezone.utc)
+    return epoch.strftime("%Y-%m-%dT%H:%M:%SZ")
+
   # Account Data
   def fetch_account_data(self):
     return self.requests("GET", "/api/v0/equity/account/cash")
@@ -36,6 +51,59 @@ class Trading212:
   def fetch_a_specific_position(self, ticker):
     return self.requests("GET", "/api/v0/equity/portfolio/ticker", {"ticker": ticker})
 
+  # Historical Items
+  def historical_order_data(self, cursor = 0, ticker = "", limit = 50):
+    query = Trading212.build_query_params(limit=limit, cursor=cursor, ticker=ticker)
+
+    return self.requests("GET", "/api/v0/equity/history/orders", query)
+
+  def paid_out_dividends(self, cursor = 0, ticker = "", limit = 50):
+    query = Trading212.build_query_params(limit=limit, cursor=cursor, ticker=ticker)
+
+    return self.requests("GET", "/api/v0/equity/history/orders", query)
+
+  def exports_list(self):
+    return self.requests("GET", "/api/v0/history/exports")
+
+  def export_csv(
+      self,
+      include_dividends = True,
+      include_interest = True,
+      include_orders = True,
+      include_transactions = True,
+      time_from = None,
+      time_to = None
+  ):
+    if time_to is None:
+      time_to = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    if time_from is None:
+      time_from = Trading212.get_epoch_as_iso8601_utc()
+
+    query = Trading212.build_query_params(
+      dataIncluded = Trading212.build_query_params(
+        includeDividends = include_dividends,
+        includeInterest = include_interest,
+        includeOrders = include_orders,
+        includeTransactions = include_transactions
+      ),
+      timeFrom = time_from,
+      timeTo = time_to
+    )
+
+    return self.requests("POST", "/api/v0/history/exports", query)
+
+  def transaction_list(self, cursor = "", time = None, limit = 50):
+    if time is None:
+      time = Trading212.get_epoch_as_iso8601_utc()
+
+    query = Trading212.build_query_params(
+      cursor = cursor,
+      time = time,
+      limit = limit
+    )
+
+    return self.requests("GET", "/api/v0/history/transactions", query)
 
   def requests(self, method, path, params = None):
     """
@@ -63,7 +131,7 @@ class Trading212:
     response = {}
 
     if response == "GET":
-      response = requests.get(url, headers=headers)
+      response = requests.get(url, headers=headers, params=params)
 
     elif response == "POST":
       response = requests.post(url, headers=headers, json=params)
