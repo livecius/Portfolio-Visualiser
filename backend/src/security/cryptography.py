@@ -1,3 +1,4 @@
+import base64
 import bcrypt
 import cryptography.fernet as fernet
 
@@ -40,44 +41,54 @@ class Encryption:
   """Interface class to handle the symmetric encryption requirements."""
 
   @staticmethod
-  def create_fernet_key(key):
-    return fernet.Fernet(key)
+  def create_fernet_key_from_password(password):
+    """
+    Creates a 32 url-safe base64-encoded bytes Fernet key from given string input.
+
+    Args:
+      password (str): The key to be encoded.
+
+    Returns:
+      Fernet: Fernet object with acceptable key.
+    """
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    hashed_32bit_password = hashed_password[:32] # bcrypt makes a 60-bit hash, we only need 32-bits.
+    fernet_key = base64.urlsafe_b64encode(hashed_32bit_password)
+
+    return fernet.Fernet(fernet_key)
 
   @staticmethod
-  def encrypt(plaintext, key):
+  def encrypt(plaintext, password):
     """
     Encrypt the given plaintext using a given key via symmetric encryption.
 
     Args:
       plaintext (str): The plaintext to be encrypted.
-      key (str): The symmetric encryption key.
+      password (str): String user password to be used as the key.
 
     Returns:
       bytes: The encrypted plaintext.
     """
-    key_bytes = key.encode('utf-8')
     plaintext_bytes = plaintext.encode('utf-8')
 
-    fernet_key = Encryption.create_fernet_key(key_bytes)
+    fernet_key = Encryption.create_fernet_key_from_password(password)
     ciphertext = fernet_key.encrypt(plaintext_bytes)
 
     return ciphertext
 
   @staticmethod
-  def decrypt(ciphertext, key):
+  def decrypt(ciphertext, password):
     """
     Decrypt the given ciphertext using a given key via symmetric encryption.
 
     Args:
       ciphertext (bytes): The ciphertext to be decrypted.
-      key (str): The symmetric encryption key.
+      password (str): String user password to be used as the key.
 
     Returns:
       bytes: The decrypted ciphertext, junk if incorrect key or ciphertext.
     """
-    key_bytes = key.encode('utf-8')
-
-    fernet_key = Encryption.create_fernet_key(key_bytes)
+    fernet_key = Encryption.create_fernet_key_from_password(password)
     plaintext = fernet_key.decrypt(ciphertext)
 
     return plaintext
