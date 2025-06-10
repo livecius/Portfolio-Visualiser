@@ -1,6 +1,7 @@
 # Runtime requirements
 fastapi[all]
 requests
+bcrypt
 
 # Developer requirements
 python-dotenv
