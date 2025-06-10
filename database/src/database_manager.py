@@ -1,5 +1,6 @@
 import os
 import sqlite3
+from tables import user, broker, api_keys, portfolio
 
 class DatabaseManager:
   """
@@ -16,4 +17,11 @@ class DatabaseManager:
         os.makedirs(self.DATA_PATH)
 
     self.connection = sqlite3.connect(database_path)
-    self.cursor = self.connection.cursor()
+
+    self.User = user.User(self.connection)
+    self.Broker = broker.Broker(self.connection)
+    self.ApiKeys = api_keys.ApiKeys(self.connection)
+    self.Portfolio = portfolio.Portfolio(self.connection)
+
+  def add_user(self, email, password):
+    self.User.add_user(email, password)
