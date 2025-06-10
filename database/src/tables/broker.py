@@ -9,6 +9,7 @@ class Broker(AbstractTable):
   def initialise_table(self):
     self.cursor.execute("""
     CREATE TABLE IF NOT EXISTS broker (
-      id INTEGER PRIMARY KEY AUTOINCREMENT
+      broker_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL UNIQUE
     );
     """)
