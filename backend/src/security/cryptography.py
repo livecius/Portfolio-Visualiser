@@ -10,10 +10,10 @@ class Hashing:
     Create a hash of the input using bcrypt.
 
     Args:
-        input (str): The input to be hashed.
+      input (str): The input to be hashed.
 
     Returns:
-        bytes: The hashed input.
+      bytes: The hashed input.
     """
 
     # bcrypt stores the salt alongside the hashed value
@@ -28,10 +28,10 @@ class Hashing:
     Confirm the hash of the input matches the given hash.
 
     Args:
-        input (str): The challenge input.
+      input (str): The challenge input.
 
     Returns:
-        bool: Whether the input challenge hash matches the given hash.
+      bool: Whether the input challenge hash matches the given hash.
     """
     input_bytes = input.encode('utf-8')
     return bcrypt.checkpw(input_bytes, hash)
@@ -49,11 +49,11 @@ class Encryption:
     Encrypt the given plaintext using a given key via symmetric encryption.
 
     Args:
-        plaintext (str): The plaintext to be encrypted.
-        key (str): The symmetric encryption key.
+      plaintext (str): The plaintext to be encrypted.
+      key (str): The symmetric encryption key.
 
     Returns:
-        bytes: The encrypted plaintext.
+      bytes: The encrypted plaintext.
     """
     key_bytes = key.encode('utf-8')
     plaintext_bytes = plaintext.encode('utf-8')
@@ -69,8 +69,11 @@ class Encryption:
     Decrypt the given ciphertext using a given key via symmetric encryption.
 
     Args:
-        ciphertext (bytes): The ciphertext to be decrypted.
-        key (str): The symmetric encryption key.
+      ciphertext (bytes): The ciphertext to be decrypted.
+      key (str): The symmetric encryption key.
+
+    Returns:
+      bytes: The decrypted ciphertext, junk if incorrect key or ciphertext.
     """
     key_bytes = key.encode('utf-8')
 
