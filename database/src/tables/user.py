@@ -10,7 +10,7 @@ class User(AbstractTable):
   def initialise_table(self):
     self.cursor.execute("""
     CREATE TABLE IF NOT EXISTS user (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT NOT NULL UNIQUE,
       password TEXT NOT NULL
     );
