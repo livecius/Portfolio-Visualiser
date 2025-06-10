@@ -1,0 +1,36 @@
+import security.cryptography as cryptography
+import pytest
+
+@pytest.fixture
+def hash_data():
+    input_val1 = "helloworld"
+    input_val2 = "goodbyeworld"
+
+    output_hash1 = cryptography.Hashing.hash(input_val1)
+    output_hash2 = cryptography.Hashing.hash(input_val2)
+
+    return {
+        "input_val1": input_val1,
+        "input_val2": input_val2,
+        "output_hash1": output_hash1,
+        "output_hash2": output_hash2,
+    }
+
+def test_compare_hash_data(hash_data):
+    assert len(hash_data["output_hash1"]) > 0
+    assert hash_data["input_val1"] != hash_data["output_hash1"]
+
+    assert hash_data["output_hash1"] != hash_data["output_hash2"]
+
+def test_verify_hash_data(hash_data):
+    assert cryptography.Hashing.verify_hash(
+        hash_data["input_val1"],
+        hash_data["output_hash1"]
+    )
+
+    assert not cryptography.Hashing.verify_hash(
+        hash_data["input_val1"],
+        hash_data["output_hash2"]
+    )
+
+
