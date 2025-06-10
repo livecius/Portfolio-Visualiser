@@ -9,6 +9,11 @@ class Portfolio(AbstractTable):
   def initialise_table(self):
     self.cursor.execute("""
     CREATE TABLE IF NOT EXISTS portfolio (
-      id INTEGER PRIMARY KEY AUTOINCREMENT
+      portfolio_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER,
+      api_key_id INT,
+      portfolio_data JSON NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES user(user_id),
+      FOREIGN KEY (api_key_id) REFERENCES broker(api_key_id)
     );
     """)
