@@ -22,6 +22,3 @@ class DatabaseManager:
     self.Broker = broker.Broker(self.connection)
     self.ApiKeys = api_keys.ApiKeys(self.connection)
     self.Portfolio = portfolio.Portfolio(self.connection)
-
-  def add_user(self, email, password):
-    self.User.add_user(email, password)
