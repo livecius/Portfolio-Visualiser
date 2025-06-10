@@ -9,6 +9,13 @@ class ApiKeys(AbstractTable):
   def initialise_table(self):
     self.cursor.execute("""
     CREATE TABLE IF NOT EXISTS api_keys (
-      id INTEGER PRIMARY KEY AUTOINCREMENT
+      api_keys_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INT,
+      broker_id INT,
+      api_key TEXT,
+      secret_key TEXT,
+      FOREIGN KEY (user_id) REFERENCES user(user_id),
+      FOREIGN KEY (broker_id) REFERENCES broker(broker_id),
+      CONSTRAINT fk_user_broker UNIQUE (user_id, broker_id) -- api_key must exist for a user / broker relation
     );
     """)
