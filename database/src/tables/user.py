@@ -15,9 +15,3 @@ class User(AbstractTable):
       password TEXT NOT NULL
     );
     """)
-
-  def add_user(self, email, password):
-    self.cursor.execute("""
-    INSERT INTO user (email, password) VALUES (?, ?)
-    """, (email, password))
-    self.connection.commit()
