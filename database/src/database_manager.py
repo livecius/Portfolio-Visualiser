@@ -1,4 +1,5 @@
 import os
+from security import cryptography_services
 import sqlite3
 from tables import user, broker, api_keys, portfolio
 
@@ -22,3 +23,17 @@ class DatabaseManager:
     self.Broker = broker.Broker(self.connection)
     self.ApiKeys = api_keys.ApiKeys(self.connection)
     self.Portfolio = portfolio.Portfolio(self.connection)
+
+  def add_user(self, email, password):
+    """
+    Add a user to the database, hashing their passwords.
+
+    Args:
+      email (str): The user's email
+      password (str): The user's password
+
+    Yields:
+      sqlite3.IntegrityError: User with email already exists.
+    """
+    password_hash = cryptography_services.Hashing.hash(password)
+    self.User.insert(email, password_hash)
