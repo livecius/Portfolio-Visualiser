@@ -24,14 +24,16 @@ def encrypted_data():
 
   password = "password123"
 
-  ciphertext1 = cryptography.Encryption.encrypt(plaintext1, password)
-  ciphertext2 = cryptography.Encryption.encrypt(plaintext2, password)
+  ciphertext1, ciphertext_salt1 = cryptography.Encryption.encrypt(plaintext1, password)
+  ciphertext2, ciphertext_salt2 = cryptography.Encryption.encrypt(plaintext2, password)
 
   return {
     "plaintext1": plaintext1,
     "plaintext2": plaintext2,
     "ciphertext1": ciphertext1,
+    "ciphertext_salt1": ciphertext_salt1,
     "ciphertext2": ciphertext2,
+    "ciphertext_salt2": ciphertext_salt2,
     "password": password,
   }
 
@@ -61,13 +63,19 @@ def test_compare_encrypted_data(encrypted_data):
 def test_decrypt_data(encrypted_data):
   assert encrypted_data["plaintext1"] == cryptography.Encryption.decrypt(
     encrypted_data["ciphertext1"],
-    encrypted_data["password"]
+    encrypted_data["password"],
+    encrypted_data["ciphertext_salt1"]
   )
 
   assert encrypted_data["plaintext2"] != cryptography.Encryption.decrypt(
     encrypted_data["ciphertext1"],
-    encrypted_data["password"]
+    encrypted_data["password"],
+    encrypted_data["ciphertext_salt1"]
   )
 
   with pytest.raises(InvalidToken):
-    cryptography.Encryption.decrypt(encrypted_data["ciphertext1"], "wrong_password")
+    cryptography.Encryption.decrypt(
+      encrypted_data["ciphertext1"],
+      "wrong_password",
+      encrypted_data["ciphertext_salt1"]
+    )
