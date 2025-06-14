@@ -36,3 +36,6 @@ class Hashing:
     """
     input_bytes = input.encode('utf-8')
     return bcrypt.checkpw(input_bytes, hash)
+
+class Encryption:
+  """Interface class to handle the symmetric encryption requirements."""
