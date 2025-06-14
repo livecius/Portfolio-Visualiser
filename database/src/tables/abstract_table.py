@@ -6,4 +6,13 @@ class AbstractTable:
     self.initialise_table()
 
   def initialise_table(self):
+    """
+    Initialise a table if it doesn't already exist.
+    """
+    raise NotImplementedError
+
+  def insert(self):
+    """
+    Insert a row into the database.
+    """
     raise NotImplementedError
