@@ -12,8 +12,8 @@ class User(AbstractTable):
     CREATE TABLE IF NOT EXISTS user (
       user_id INTEGER PRIMARY KEY AUTOINCREMENT,
       email TEXT NOT NULL UNIQUE,
-      password TEXT NOT NULL,
-      fernet_salt TEXT
+      password BLOB NOT NULL,
+      fernet_salt BLOB
     );
     """)
 
