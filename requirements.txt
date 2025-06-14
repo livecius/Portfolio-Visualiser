@@ -1,8 +1,10 @@
 # Runtime requirements
+bcrypt
+cryptography
 fastapi[all]
 requests
 
 # Developer requirements
-python-dotenv
 pytest
 pytest-cov
+python-dotenv
